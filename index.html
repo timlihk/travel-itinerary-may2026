@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>May 2026 — Miami · Europe · Hong Kong</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1714;
+  --cream: #f5f0e8;
+  --warm: #e8dfd3;
+  --gold: #b8943e;
+  --gold-light: #d4b96a;
+  --sage: #7a8c6e;
+  --terracotta: #c4704b;
+  --slate: #5a5650;
+  --lake: #4a7c8a;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--cream); color: var(--ink); font-family: var(--font-body); font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+  position: relative; text-align: center; padding: 60px 24px;
+  background: linear-gradient(168deg, #1a1714 0%, #2a2520 40%, #3a302a 70%, #1a1714 100%);
+  overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(184,148,62,0.08) 0%, transparent 70%);
+}
+.hero::after {
+  content: ''; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v60M0 30h60' stroke='%23ffffff' stroke-width='.3' opacity='.04'/%3E%3C/svg%3E");
+}
+.hero-content { position: relative; z-index: 1; }
+.hero-label {
+  font-family: var(--font-body); font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 32px; font-weight: 500;
+  opacity: 0; animation: fadeUp .8s ease forwards .3s;
+}
+.hero h1 {
+  font-family: var(--font-display); font-weight: 300; font-size: clamp(42px, 8vw, 96px);
+  color: #f5f0e8; line-height: 1.05; margin-bottom: 16px; letter-spacing: -1px;
+  opacity: 0; animation: fadeUp .8s ease forwards .5s;
+}
+.hero h1 em { font-style: italic; color: var(--gold-light); }
+.hero-sub {
+  font-family: var(--font-display); font-size: clamp(18px, 3vw, 28px); font-weight: 300;
+  color: rgba(245,240,232,0.5); letter-spacing: 1px;
+  opacity: 0; animation: fadeUp .8s ease forwards .7s;
+}
+.hero-route {
+  margin-top: 48px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 6px;
+  opacity: 0; animation: fadeUp .8s ease forwards .9s;
+}
+.hero-route span {
+  font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,240,232,0.35);
+  font-weight: 400;
+}
+.hero-route .dot { color: var(--gold); font-size: 8px; }
+.scroll-hint {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  opacity: 0; animation: fadeUp .8s ease forwards 1.2s;
+}
+.scroll-hint span {
+  display: block; width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent);
+  margin: 0 auto;
+}
+
+/* SECTIONS */
+.section { padding: 100px 24px; max-width: 1100px; margin: 0 auto; }
+.section-label {
+  font-family: var(--font-body); font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 12px; font-weight: 500;
+}
+.section h2 {
+  font-family: var(--font-display); font-weight: 300; font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.1; margin-bottom: 40px; color: var(--ink);
+}
+.section h2 em { font-style: italic; color: var(--terracotta); }
+
+/* TIMELINE */
+.timeline { position: relative; }
+.timeline::before {
+  content: ''; position: absolute; left: 24px; top: 0; bottom: 0; width: 1px;
+  background: linear-gradient(to bottom, var(--gold), var(--warm), var(--gold));
+}
+.tl-item {
+  position: relative; padding-left: 64px; margin-bottom: 48px;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.tl-item.visible { opacity: 1; transform: translateY(0); }
+.tl-dot {
+  position: absolute; left: 17px; top: 6px; width: 15px; height: 15px;
+  border-radius: 50%; border: 2px solid var(--gold); background: var(--cream);
+}
+.tl-item.flight .tl-dot { background: var(--gold); }
+.tl-date {
+  font-family: var(--font-display); font-size: 14px; font-weight: 500;
+  color: var(--slate); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px;
+}
+.tl-title {
+  font-family: var(--font-display); font-size: 26px; font-weight: 400;
+  margin-bottom: 6px; line-height: 1.2;
+}
+.tl-desc { font-size: 14px; color: var(--slate); line-height: 1.7; max-width: 560px; }
+.tl-tag {
+  display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 11px;
+  font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin-right: 6px; margin-top: 8px;
+}
+.tag-flight { background: rgba(184,148,62,0.15); color: var(--gold); }
+.tag-stay { background: rgba(122,140,110,0.15); color: var(--sage); }
+.tag-train { background: rgba(74,124,138,0.15); color: var(--lake); }
+
+/* DESTINATION CARDS */
+.dest-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
+@media(min-width:700px) { .dest-grid { grid-template-columns: 1fr 1fr; } }
+.dest-card {
+  background: #fff; border-radius: 16px; overflow: hidden;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.04); transition: transform .3s ease, box-shadow .3s ease;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .6s ease, transform .6s ease, box-shadow .3s ease;
+}
+.dest-card.visible { opacity: 1; transform: translateY(0); }
+.dest-card:hover { box-shadow: 0 8px 40px rgba(0,0,0,0.08); }
+.dest-card-img {
+  height: 200px; position: relative; overflow: hidden;
+  display: flex; align-items: flex-end; padding: 20px;
+}
+.dest-card-img::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(26,23,20,0.7) 0%, transparent 60%);
+}
+.dest-card-img .dest-city {
+  position: relative; z-index: 1; font-family: var(--font-display);
+  font-size: 32px; font-weight: 300; color: #fff; line-height: 1;
+}
+.dest-card-img .dest-dates {
+  position: absolute; top: 16px; right: 16px; z-index: 1;
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold-light); font-weight: 500;
+  background: rgba(26,23,20,0.6); padding: 4px 12px; border-radius: 20px;
+}
+.geneva-bg { background: linear-gradient(135deg, #4a7c8a 0%, #6a9caa 50%, #3a6070 100%); }
+.venice-bg { background: linear-gradient(135deg, #c4704b 0%, #d4906b 50%, #a45030 100%); }
+.como-bg { background: linear-gradient(135deg, #7a8c6e 0%, #9aac8e 50%, #5a6c4e 100%); }
+.dublin-bg { background: linear-gradient(135deg, #5a5650 0%, #7a7670 50%, #3a3630 100%); }
+
+.dest-card-body { padding: 24px; }
+.dest-card-body h4 {
+  font-family: var(--font-display); font-size: 18px; font-weight: 500;
+  margin-bottom: 12px; color: var(--ink);
+}
+.act-list { list-style: none; }
+.act-list li {
+  padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.05);
+  font-size: 13px; line-height: 1.6;
+}
+.act-list li:last-child { border-bottom: none; }
+.act-tag {
+  display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 8px;
+  vertical-align: middle;
+}
+.at-culture { background: var(--terracotta); }
+.at-food { background: var(--gold); }
+.at-nature { background: var(--sage); }
+.at-walk { background: var(--lake); }
+.at-art { background: #8a6aaa; }
+
+/* HOTELS */
+.hotel-section { background: var(--ink); color: var(--cream); padding: 100px 24px; }
+.hotel-section .section { padding: 0; }
+.hotel-section h2 { color: var(--cream); }
+.hotel-section .section-label { color: var(--gold); }
+.hotel-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+@media(min-width:700px) { .hotel-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(min-width:1000px) { .hotel-grid { grid-template-columns: repeat(3, 1fr); } }
+.hotel-card {
+  background: rgba(245,240,232,0.05); border: 1px solid rgba(245,240,232,0.1);
+  border-radius: 12px; padding: 28px; position: relative; overflow: hidden;
+  transition: border-color .3s ease, background .3s ease;
+}
+.hotel-card:hover { border-color: var(--gold); background: rgba(245,240,232,0.08); }
+.hotel-card.pick::before {
+  content: 'TOP PICK'; position: absolute; top: 16px; right: 16px;
+  font-size: 9px; letter-spacing: 2px; font-weight: 500; color: var(--ink);
+  background: var(--gold); padding: 3px 10px; border-radius: 12px;
+}
+.hotel-loc {
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 8px; font-weight: 500;
+}
+.hotel-name {
+  font-family: var(--font-display); font-size: 22px; font-weight: 400;
+  margin-bottom: 8px; line-height: 1.2;
+}
+.hotel-cat { font-size: 12px; color: rgba(245,240,232,0.4); margin-bottom: 12px; }
+.hotel-desc { font-size: 13px; color: rgba(245,240,232,0.6); line-height: 1.7; }
+.hotel-ultima {
+  margin-top: 14px; font-size: 11px; color: var(--gold-light);
+  letter-spacing: 1px; font-weight: 500;
+}
+
+/* BOOKING */
+.booking-section { background: #fff; }
+.booking-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media(min-width:700px) { .booking-grid { grid-template-columns: 1fr 1fr; } }
+.booking-item {
+  padding: 20px 24px; background: var(--cream); border-radius: 12px;
+  border-left: 3px solid var(--gold);
+}
+.booking-item strong { font-weight: 500; }
+.booking-item p { font-size: 13px; color: var(--slate); margin-top: 4px; line-height: 1.6; }
+
+/* FOOTER */
+footer {
+  text-align: center; padding: 60px 24px; font-size: 12px;
+  color: var(--slate); letter-spacing: 1px;
+  border-top: 1px solid var(--warm);
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* RESPONSIVE */
+@media(max-width:600px) {
+  .timeline::before { left: 12px; }
+  .tl-item { padding-left: 40px; }
+  .tl-dot { left: 5px; }
+  .section { padding: 60px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-label">May 2026 · 17 Days</div>
+    <h1>Miami to <em>Europe</em><br>& Home Again</h1>
+    <div class="hero-sub">A journey through five cities and three countries</div>
+    <div class="hero-route">
+      <span>Hong Kong</span><span class="dot">●</span>
+      <span>Miami</span><span class="dot">●</span>
+      <span>London</span><span class="dot">●</span>
+      <span>Geneva</span><span class="dot">●</span>
+      <span>Venice</span><span class="dot">●</span>
+      <span>Lake Como</span><span class="dot">●</span>
+      <span>Dublin</span><span class="dot">●</span>
+      <span>Hong Kong</span>
+    </div>
+  </div>
+  <div class="scroll-hint"><span></span></div>
+</section>
+
+<!-- ITINERARY TIMELINE -->
+<section class="section" id="itinerary">
+  <div class="section-label">The Journey</div>
+  <h2>Day by <em>Day</em></h2>
+  <div class="timeline">
+
+    <div class="tl-item flight">
+      <div class="tl-dot"></div>
+      <div class="tl-date">May 5 · Tuesday</div>
+      <div class="tl-title">Hong Kong → Dallas → Miami</div>
+      <div class="tl-desc"><strong>CX876</strong> · HKG 16:05 → DFW 17:50 same day · Airbus A350-1000 · 14h 45m nonstop<br>Connect to <strong>AA DFW→MIA</strong> evening flight (~3h). Arrive Miami ~midnight.</div>
+      <span class="tl-tag tag-flight">CX876 + AA</span>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">May 6–7 · Wed–Thu</div>
+      <div class="tl-title">Miami</div>
+      <div class="tl-desc">Two full days in Miami.</div>
+      <span class="tl-tag tag-stay">2 nights</span>
+    </div>
+
+    <div class="tl-item flight">
+      <div class="tl-dot"></div>
+      <div class="tl-date">May 8 · Friday</div>
+      <div class="tl-title">Miami → London</div>
+      <div class="tl-desc"><strong>AA38</strong> · MIA 19:40 → LHR 09:25+1 (May 9) · Boeing 777-300ER · 8h 45m nonstop<br>Arrives Heathrow Terminal 3. Connect same day to Geneva.</div>
+      <span class="tl-tag tag-flight">AA38</span>
+    </div>
+
+    <div class="tl-item flight">
+      <div class="tl-dot"></div>
+      <div class="tl-date">May 9 · Saturday</div>
+      <div class="tl-title">London → Geneva</div>
+      <div class="tl-desc">Land LHR T3 at 09:25 on AA38. Transfer T3→T5.<br><strong>BA750</strong> · LHR T5 14:15 → GVA 17:00 · 1h 45m nonstop</div>
+      <span class="tl-tag tag-flight">BA750</span>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">May 9–12 · Sat–Tue</div>
+      <div class="tl-title">Geneva</div>
+      <div class="tl-desc">Mandarin Oriental Geneva. Old Town, Patek Philippe Museum, Bains des Pâquis, CERN Science Gateway. Michelin dining at Bayview and Il Lago.<br><strong>May 12 at 2pm:</strong> Sotheby's High Jewelry auction.</div>
+      <span class="tl-tag tag-stay">3 nights</span>
+    </div>
+
+    <div class="tl-item flight">
+      <div class="tl-dot"></div>
+      <div class="tl-date">May 12 · Tuesday evening</div>
+      <div class="tl-title">Geneva → Venice</div>
+      <div class="tl-desc">After the Sotheby's auction.<br><strong>LX2819 + LX1666</strong> (SWISS/Helvetic) · GVA T1 20:00 → ZRH (50 min) → VCE 22:50 · HK$3,020/pp</div>
+      <span class="tl-tag tag-flight">SWISS / Helvetic</span>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">May 12–16 · Tue–Sat</div>
+      <div class="tl-title">Venice</div>
+      <div class="tl-desc">Hotel Metropole Venice (4 nights). Venice Biennale 2026 — "In Minor Keys." Arsenale, Giardini, collateral events, Peggy Guggenheim Collection. Three Michelin-starred dinners booked.</div>
+      <span class="tl-tag tag-stay">4 nights</span>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">May 16 · Saturday</div>
+      <div class="tl-title">Venice → Lake Como</div>
+      <div class="tl-desc"><strong>Private car/limo</strong> depart Venice ~1pm after early lunch → Grand Hotel Tremezzo · ~3.5h, arrive ~4:30pm.</div>
+      <span class="tl-tag tag-train">Limo</span>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">May 16–18 · Sat–Mon</div>
+      <div class="tl-title">Lake Como</div>
+      <div class="tl-desc">Grand Hotel Tremezzo (2 nights). Villa Balbianello, Villa Carlotta. Golden Triangle ferry tour. Private boat cruise.</div>
+      <span class="tl-tag tag-stay">2 nights</span>
+    </div>
+
+    <div class="tl-item flight">
+      <div class="tl-dot"></div>
+      <div class="tl-date">May 18 · Monday</div>
+      <div class="tl-title">Lake Como → Dublin</div>
+      <div class="tl-desc">Transfer to Bergamo Orio al Serio (~1h from lake).<br><strong>FR4845</strong> (Ryanair) · BGY 18:20 → DUB T1 ~19:55 · 2h 35m nonstop</div>
+      <span class="tl-tag tag-flight">FR4845</span>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">May 18–20 · Mon–Wed</div>
+      <div class="tl-title">Dublin</div>
+      <div class="tl-desc">Hyatt Centric The Liberties (2 nights, Mengyu's Hyatt points). 9am appointment May 19. Morning business May 20.</div>
+      <span class="tl-tag tag-stay">2 nights</span>
+    </div>
+
+    <div class="tl-item flight">
+      <div class="tl-dot"></div>
+      <div class="tl-date">May 20–21 · Tue–Wed</div>
+      <div class="tl-title">Dublin → London → Hong Kong</div>
+      <div class="tl-desc"><strong>BA5966</strong> (EI166 codeshare) · DUB 13:30 → LHR 15:00 · 1h 30m nonstop<br>Connect to <strong>CX250</strong> · LHR T2 17:50 → HKG 13:45+1 · A350 · 11h 55m. Arrive May 21 afternoon.</div>
+      <span class="tl-tag tag-flight">BA5966 + CX250</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- DESTINATIONS & ACTIVITIES -->
+<section class="section" id="activities">
+  <div class="section-label">What to Do</div>
+  <h2>By <em>Destination</em></h2>
+  <div class="dest-grid">
+
+    <div class="dest-card">
+      <div class="dest-card-img geneva-bg">
+        <div class="dest-dates">May 9–11</div>
+        <div class="dest-city">Geneva</div>
+      </div>
+      <div class="dest-card-body">
+        <h4>3 nights · Lakeside & culture</h4>
+        <ul class="act-list">
+          <li><span class="act-tag at-walk"></span><strong>Quai du Mont-Blanc</strong> — Chestnut trees in bloom, Jet d'Eau, afternoon promenade</li>
+          <li><span class="act-tag at-culture"></span><strong>Patek Philippe Museum</strong> — Four floors of horological masterpieces. Closed Mon. Open Sat 10–18, Sun 14–18. Note: May 9 exceptional closure 10am–2pm, visit after 14:00</li>
+          <li><span class="act-tag at-walk"></span><strong>Bains des Pâquis</strong> — Iconic lake baths, casual fondue. Open 10–21 (Sun from 9). Morning swim for best light</li>
+          <li><span class="act-tag at-culture"></span><strong>Vieille Ville</strong> — St. Peter's Cathedral tower, Maison Tavel, hidden courtyards</li>
+          <li><span class="act-tag at-culture"></span><strong>CERN Science Gateway</strong> — Free immersive exhibition. Open Tue–Sun 9–17. Closed Mondays. Book timed entry online</li>
+          <li><span class="act-tag at-nature"></span><strong>Mont Salève cable car</strong> — Panoramic views of lake & Alps. Half-day trip, accessible by bus</li>
+          <li><span class="act-tag at-nature"></span><strong>Carouge</strong> — Geneva's "little Italy," artisan streets, Saturday market, La Bottega trattoria</li>
+          <li><span class="act-tag at-food"></span><strong>Il Lago at Four Seasons</strong> — Michelin-starred lakeside Italian (Sat May 9, 7pm ✓)</li>
+          <li><span class="act-tag at-food"></span><strong>L'Arabesque at President Wilson</strong> — Lebanese, replacing Bayview (closed Sun/Mon) (Sun May 10, 7pm ✓)</li>
+          <li><span class="act-tag at-food"></span><strong>Café du Soleil</strong> — Legendary Geneva fondue</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-img venice-bg">
+        <div class="dest-dates">May 12–16</div>
+        <div class="dest-city">Venice</div>
+      </div>
+      <div class="dest-card-body">
+        <h4>4 nights · Biennale & beyond</h4>
+        <ul class="act-list">
+          <li><span class="act-tag at-art"></span><strong>Biennale: Arsenale</strong> — "In Minor Keys" main exhibition, 111 artists, allow 4–5 hours. 11am–7pm (Fri/Sat until 8pm)</li>
+          <li><span class="act-tag at-art"></span><strong>Biennale: Giardini</strong> — 30 national pavilions (US, UK, France, Japan, Germany). Closed Mondays</li>
+          <li><span class="act-tag at-art"></span><strong>Collateral events</strong> — 31 satellite shows across Venice</li>
+          <li><span class="act-tag at-culture"></span><strong>Peggy Guggenheim</strong> — Pollock, Picasso, Ernst. Open daily 10–18 except Tuesdays. Visit Wed or Thu morning</li>
+          <li><span class="act-tag at-culture"></span><strong>La Fenice: Carmen</strong> — Bizet's opera, May 14 evening. Book tickets early at teatrolafenice.it</li>
+          <li><span class="act-tag at-walk"></span><strong>Dorsoduro & Castello</strong> — Quieter sestieri. Scala Contarini del Bovolo for spiral staircase views</li>
+          <li><span class="act-tag at-food"></span><strong>Antiche Carampane</strong> — Outstanding Venetian seafood (May 12, 9:30pm ✓)</li>
+          <li><span class="act-tag at-food"></span><strong>Alle Testiere</strong> — 10 tables, extraordinary seafood tasting (May 13, 9:30pm ✓)</li>
+          <li><span class="act-tag at-food"></span><strong>Da Fiore</strong> — Michelin-starred, legendary risotto (May 14, 7pm ✓)</li>
+          <li><span class="act-tag at-food"></span><strong>Glam by Enrico Bartolini</strong> — 2 Michelin stars at Palazzo Venart. Creative tasting menu (May 15, 7:30pm — to book)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-img como-bg">
+        <div class="dest-dates">May 16–18</div>
+        <div class="dest-city">Lake Como</div>
+      </div>
+      <div class="dest-card-body">
+        <h4>2 nights · Villas, gardens & ferries</h4>
+        <ul class="act-list">
+          <li><span class="act-tag at-nature"></span><strong>Villa Balbianello</strong> — Open daily except Mon & Wed, 10–18. Book at fondoambiente.it. Sun May 17 ✓</li>
+          <li><span class="act-tag at-nature"></span><strong>Villa Carlotta</strong> — Azaleas & rhododendrons in peak bloom. Open 10–19, last ticket 18:00</li>
+          <li><span class="act-tag at-nature"></span><strong>Villa Monastero</strong> — 2km botanical garden, lakeside, Varenna</li>
+          <li><span class="act-tag at-nature"></span><strong>Villa Melzi</strong> — Japanese pond, sculptures, Bellagio</li>
+          <li><span class="act-tag at-walk"></span><strong>Golden Triangle</strong> — Varenna → Bellagio → Menaggio by ferry. Buy day pass</li>
+          <li><span class="act-tag at-walk"></span><strong>Private boat tour</strong> — Wooden boat past famous villas incl. Villa Oleandra (Clooney's). ~€240/hr</li>
+          <li><span class="act-tag at-walk"></span><strong>Greenway del Lago</strong> — Gentle 10km cycling/walk along western shore. E-bike rental available</li>
+          <li><span class="act-tag at-walk"></span><strong>Castello di Vezio</strong> — 20-min hike, panoramic castle above Varenna</li>
+          <li><span class="act-tag at-food"></span><strong>Al Prato</strong> — Varenna's best, 7pm May 16. Hotel private boat across the lake at sunset & return after dinner</li>
+          <li><span class="act-tag at-food"></span><strong>L'Escale Trattoria</strong> — Grand Hotel Tremezzo (May 16, 7pm ✓)</li>
+          <li><span class="act-tag at-food"></span><strong>Visteria</strong> — Grand Hotel Tremezzo (May 17, 7pm ✓)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <div class="dest-card-img dublin-bg">
+        <div class="dest-dates">May 19–20</div>
+        <div class="dest-city">Dublin</div>
+      </div>
+      <div class="dest-card-body">
+        <h4>2 nights · Business & culture</h4>
+        <ul class="act-list">
+          <li><span class="act-tag at-culture"></span><strong>Book of Kells & Old Library</strong> — Trinity College. Pre-book early entry at tcd.ie</li>
+          <li><span class="act-tag at-walk"></span><strong>St Patrick's Cathedral & St Stephen's Green</strong> — Historic Dublin walk</li>
+          <li><span class="act-tag at-culture"></span><strong>National Gallery of Ireland</strong> — Free, excellent Caravaggio</li>
+          <li><span class="act-tag at-food"></span><strong>Restaurant Patrick Guilbaud</strong> — 2 Michelin stars, at The Merrion (our hotel)</li>
+          <li><span class="act-tag at-food"></span><strong>The Long Hall</strong> — Victorian pub, Guinness done right</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOTELS -->
+<div class="hotel-section" id="hotels">
+  <section class="section">
+    <div class="section-label">Confirmed</div>
+    <h2>Our <em>Hotels</em></h2>
+    <div class="hotel-grid">
+
+      <div class="hotel-card pick">
+        <div class="hotel-loc">Geneva · May 9–12</div>
+        <div class="hotel-name">Mandarin Oriental</div>
+        <div class="hotel-cat">Superior Queen · 3 nights · CHF 990/night</div>
+        <div class="hotel-desc">Quai Turrettini. Lakeside location, walkable to Old Town. Sotheby's High Jewelry preview exhibition hosted here May 8–11.</div>
+        <div class="hotel-ultima">✦ ULTIMA 2nd night free · Total: CHF 2,072</div>
+      </div>
+
+      <div class="hotel-card pick">
+        <div class="hotel-loc">Venice · May 12–16</div>
+        <div class="hotel-name">Hotel Metropole</div>
+        <div class="hotel-cat">Exclusive Suite · 4 nights · EUR 1,040/night</div>
+        <div class="hotel-desc">Riva degli Schiavoni. Waterfront luxury steps from San Marco and Biennale Giardini. Oriental-inspired interiors. $50 USD resort credit.</div>
+        <div class="hotel-ultima">✦ ULTIMA 2nd night free · Total: EUR 3,120</div>
+      </div>
+
+      <div class="hotel-card pick">
+        <div class="hotel-loc">Lake Como · May 16–18</div>
+        <div class="hotel-name">Grand Hotel Tremezzo</div>
+        <div class="hotel-cat">Junior Suite Park View · 2 nights · EUR 3,800/night</div>
+        <div class="hotel-desc">Art Nouveau icon. 3 pools including floating lake pool, private beach. Views to Bellagio. Perfect for villa-hopping. Complimentary breakfast & valet parking.</div>
+        <div class="hotel-ultima">✦ ULTIMA 2nd night free · Total: EUR 3,800</div>
+      </div>
+
+      <div class="hotel-card pick">
+        <div class="hotel-loc">Dublin · May 18–20</div>
+        <div class="hotel-name">Hyatt Centric The Liberties</div>
+        <div class="hotel-cat">4-star modern urban hotel · 2 nights</div>
+        <div class="hotel-desc">Contemporary design in Dublin's Liberties quarter. Booked on Mengyu's Hyatt points.</div>
+        <div class="hotel-ultima">✦ Hyatt points redemption</div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+
+
+<footer>
+  <p>Travel Itinerary · May 5–21, 2026 · Generated March 25, 2026</p>
+</footer>
+
+<script>
+// Scroll-triggered animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.tl-item, .dest-card').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
