@@ -220,6 +220,42 @@ a.hotel-link { text-decoration: none; color: inherit; display: block; }
 .booking-item strong { font-weight: 500; }
 .booking-item p { font-size: 13px; color: var(--slate); margin-top: 4px; line-height: 1.6; }
 
+/* FLIGHT REFERENCE */
+.flight-ref-section { background: linear-gradient(180deg, #f8f3ec 0%, #efe6da 100%); }
+.flight-ref-intro {
+  max-width: 760px; margin-bottom: 28px; font-size: 14px; color: var(--slate); line-height: 1.8;
+}
+.flight-ref-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+@media(min-width:900px) { .flight-ref-grid { grid-template-columns: repeat(2, 1fr); } }
+.flight-card {
+  background: rgba(255,255,255,0.78);
+  border: 1px solid rgba(184,148,62,0.18);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 30px rgba(26,23,20,0.04);
+}
+.flight-card h4 {
+  font-family: var(--font-display); font-size: 28px; font-weight: 400; line-height: 1.1; margin-bottom: 8px;
+}
+.flight-card-date {
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 12px;
+}
+.flight-card-source {
+  display: inline-block; margin-bottom: 16px; padding: 3px 10px; border-radius: 999px;
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 500;
+  background: rgba(74,124,138,0.12); color: var(--lake);
+}
+.flight-lines { list-style: none; }
+.flight-lines li {
+  padding: 8px 0; border-top: 1px solid rgba(26,23,20,0.06); font-size: 13px; color: var(--slate); line-height: 1.65;
+}
+.flight-lines li:first-child { border-top: none; padding-top: 0; }
+.flight-lines strong { color: var(--ink); font-weight: 500; }
+.flight-warning {
+  border-color: rgba(196,112,75,0.28);
+  background: rgba(255,248,243,0.95);
+}
+
 /* FOOTER */
 footer {
   text-align: center; padding: 60px 24px; font-size: 12px;
@@ -274,7 +310,7 @@ footer {
       <div class="tl-dot"></div>
       <div class="tl-date">May 5 · Tuesday</div>
       <div class="tl-title">Hong Kong → Dallas → Miami</div>
-      <div class="tl-desc"><strong>CX876</strong> · HKG 16:05 → DFW 17:50 same day · Airbus A350-1000 · 14h 45m nonstop<br>Connect to <strong>AA DFW→MIA</strong> evening flight (~3h). Arrive Miami ~midnight.</div>
+      <div class="tl-desc"><strong>CX876</strong> · HKG T1 16:05 → DFW Terminal D 17:50 · 14h 45m nonstop · Business<br>Connect to <strong>AA2694</strong> · DFW 19:55 → MIA 23:48 · 2h 53m nonstop · First · Boeing 737-800</div>
       <span class="tl-tag tag-flight">CX876 + AA</span>
     </div>
 
@@ -290,7 +326,7 @@ footer {
       <div class="tl-dot"></div>
       <div class="tl-date">May 8 · Friday</div>
       <div class="tl-title">Miami → London</div>
-      <div class="tl-desc"><strong>AA38</strong> · MIA 19:40 → LHR 09:25+1 (May 9) · Boeing 777-300ER · 8h 45m nonstop<br>Arrives Heathrow Terminal 3. Connect same day to Geneva.</div>
+      <div class="tl-desc"><strong>AA38</strong> · MIA 19:05 → LHR T3 09:00+1 (May 9) · Boeing 777-300ER · 8h 55m nonstop · Business<br>Same-day Heathrow connection onward to Geneva.</div>
       <span class="tl-tag tag-flight">AA38</span>
     </div>
 
@@ -298,7 +334,7 @@ footer {
       <div class="tl-dot"></div>
       <div class="tl-date">May 9 · Saturday</div>
       <div class="tl-title">London → Geneva</div>
-      <div class="tl-desc">Land LHR T3 at 09:25 on AA38. Transfer T3→T5.<br><strong>BA750</strong> · LHR T5 14:15 → GVA 17:00 · 1h 45m nonstop</div>
+      <div class="tl-desc">Land LHR T3 at 09:00 on AA38. Transfer T3→T5.<br><strong>BA750</strong> · LHR T5 14:15 → GVA 17:00 · 1h 45m nonstop</div>
       <span class="tl-tag tag-flight">BA750</span>
     </div>
 
@@ -314,7 +350,7 @@ footer {
       <div class="tl-dot"></div>
       <div class="tl-date">May 12 · Tuesday evening</div>
       <div class="tl-title">Geneva → Venice</div>
-      <div class="tl-desc">After the Sotheby's auction.<br><strong>LX2819 + LX1666</strong> (SWISS/Helvetic) · GVA T1 20:00 → ZRH (50 min) → VCE 22:50 · HK$3,020/pp</div>
+      <div class="tl-desc">After the Sotheby's auction.<br><strong>LX2819 + LX1666</strong> (SWISS / Helvetic) · GVA T1 20:00 → ZRH 20:55, then ZRH 21:45 → VCE 22:50 · both confirmed · 1 checked bag each</div>
       <span class="tl-tag tag-flight">SWISS / Helvetic</span>
     </div>
 
@@ -322,7 +358,7 @@ footer {
       <div class="tl-dot"></div>
       <div class="tl-date">May 12–16 · Tue–Sat</div>
       <div class="tl-title">Venice</div>
-      <div class="tl-desc">Palazzina Grassi (4 nights). Venice Biennale 2026 — "In Minor Keys." Arsenale, Giardini, collateral events, Peggy Guggenheim Collection. Three Michelin-starred dinners booked.</div>
+      <div class="tl-desc">Hyatt Centric Murano Venice (4 nights). Venice Biennale 2026 — "In Minor Keys." Arsenale, Giardini, collateral events, Peggy Guggenheim Collection. Three Michelin-starred dinners booked.</div>
       <span class="tl-tag tag-stay">4 nights</span>
     </div>
 
@@ -346,7 +382,7 @@ footer {
       <div class="tl-dot"></div>
       <div class="tl-date">May 18 · Monday</div>
       <div class="tl-title">Lake Como → Dublin</div>
-      <div class="tl-desc">Transfer to Bergamo Orio al Serio (~1h from lake).<br><strong>FR4845</strong> (Ryanair) · BGY 18:20 → DUB T1 ~19:55 · 2h 35m nonstop</div>
+      <div class="tl-desc">Transfer to Bergamo Orio al Serio (~1h from lake).<br><strong>FR4845</strong> (Ryanair) · BGY 18:20 → DUB 19:55 · 2h 35m nonstop · seats 04B/04C · booking LRFI7Y</div>
       <span class="tl-tag tag-flight">FR4845</span>
     </div>
 
@@ -354,7 +390,7 @@ footer {
       <div class="tl-dot"></div>
       <div class="tl-date">May 18–19 · Mon–Tue</div>
       <div class="tl-title">Dublin</div>
-      <div class="tl-desc">Hyatt Centric The Liberties (1 night, Mengyu's Hyatt points). 9am appointment May 19.</div>
+      <div class="tl-desc">Hyatt Centric The Liberties Dublin (1 night, Hyatt points). 9am appointment May 19.</div>
       <span class="tl-tag tag-stay">1 night</span>
     </div>
 
@@ -370,7 +406,7 @@ footer {
       <div class="tl-dot"></div>
       <div class="tl-date">May 19–20 · Tue–Wed</div>
       <div class="tl-title">London</div>
-      <div class="tl-desc">Park Hyatt London (1 night). Final evening before flying home.</div>
+      <div class="tl-desc">Park Hyatt London River Thames (1 night, Hyatt points). Final evening before flying home.</div>
       <span class="tl-tag tag-stay">1 night</span>
     </div>
 
@@ -378,7 +414,7 @@ footer {
       <div class="tl-dot"></div>
       <div class="tl-date">May 20–21 · Wed–Thu</div>
       <div class="tl-title">London → Hong Kong</div>
-      <div class="tl-desc"><strong>CX250</strong> · LHR T2 17:50 → HKG 13:45+1 · A350 · 11h 55m. Arrive May 21 afternoon.</div>
+      <div class="tl-desc"><strong>CX250</strong> · LHR T3 18:20 → HKG T1 14:10+1 · Boeing 777-300ER · 12h 50m nonstop · Business</div>
       <span class="tl-tag tag-flight">CX250</span>
     </div>
 
@@ -485,23 +521,23 @@ footer {
     <h2>Our <em>Hotels</em></h2>
     <div class="hotel-grid">
 
-      <a class="hotel-link" href="https://www.mandarinoriental.com/en/geneva/rhone/luxury-hotel" target="_blank">
+      <a class="hotel-link" href="https://www.mandarinoriental.com/en/geneva/rhone-river" target="_blank">
       <div class="hotel-card pick">
         <div class="hotel-loc">Geneva · May 9–12</div>
-        <div class="hotel-name">Mandarin Oriental</div>
-        <div class="hotel-cat">Superior Queen · 3 nights · CHF 990/night</div>
+        <div class="hotel-name">Mandarin Oriental, Geneva</div>
+        <div class="hotel-cat">Superior Queen Room · 3 nights</div>
         <div class="hotel-desc">Quai Turrettini. Lakeside location, walkable to Old Town. Sotheby's High Jewelry preview exhibition hosted here May 8–11.</div>
-        <div class="hotel-ultima">✦ ULTIMA 2nd night free · Total: CHF 2,072</div>
+        <div class="hotel-ultima">✦ Cancellation: 7 days before local check-in time · ULTIMA</div>
       </div>
       </a>
 
-      <a class="hotel-link" href="https://www.palazzinagrassi.com" target="_blank">
+      <a class="hotel-link" href="https://www.hyatt.com/hyatt-centric/en-US/vcect-hyatt-centric-murano-venice" target="_blank">
       <div class="hotel-card pick">
         <div class="hotel-loc">Venice · May 12–16</div>
-        <div class="hotel-name">Palazzina Grassi</div>
-        <div class="hotel-cat">Exclusive Suite · 4 nights · EUR 1,040/night</div>
-        <div class="hotel-desc">Grand Canal boutique hotel designed by Philippe Starck. Steps from Accademia and Peggy Guggenheim. Bold contemporary interiors.</div>
-        <div class="hotel-ultima">✦ ULTIMA 2nd night free · Total: EUR 3,120</div>
+        <div class="hotel-name">Hyatt Centric Murano Venice</div>
+        <div class="hotel-cat">1 King Bed · 4 nights</div>
+        <div class="hotel-desc">Murano base for the Venice stay, with direct water access and Hyatt points redemption.</div>
+        <div class="hotel-ultima">✦ Cancellation: 72 hours prior · Hyatt points</div>
       </div>
       </a>
 
@@ -509,28 +545,29 @@ footer {
       <div class="hotel-card pick">
         <div class="hotel-loc">Lake Como · May 16–18</div>
         <div class="hotel-name">Grand Hotel Tremezzo</div>
-        <div class="hotel-cat">Junior Suite Park View · 2 nights · EUR 3,800/night</div>
+        <div class="hotel-cat">Junior Suite With Park View · 2 nights</div>
         <div class="hotel-desc">Art Nouveau icon. 3 pools including floating lake pool, private beach. Views to Bellagio. Perfect for villa-hopping. Complimentary breakfast & valet parking.</div>
-        <div class="hotel-ultima">✦ ULTIMA 2nd night free · Total: EUR 3,800</div>
+        <div class="hotel-ultima">✦ Cancellation: 21 days before local check-in time, ie April 25, 2026 · ULTIMA</div>
       </div>
       </a>
 
-      <a class="hotel-link" href="https://www.hyatt.com/hyatt-centric/dubct-hyatt-centric-the-liberties-dublin" target="_blank">
+      <a class="hotel-link" href="https://www.hyatt.com/hyatt-centric/en-US/dubct-hyatt-centric-the-liberties-dublin" target="_blank">
       <div class="hotel-card pick">
         <div class="hotel-loc">Dublin · May 18–19</div>
-        <div class="hotel-name">Hyatt Centric The Liberties</div>
-        <div class="hotel-cat">4-star modern urban hotel · 1 night</div>
-        <div class="hotel-desc">Contemporary design in Dublin's Liberties quarter. Booked on Mengyu's Hyatt points.</div>
-        <div class="hotel-ultima">✦ Hyatt points redemption</div>
+        <div class="hotel-name">Hyatt Centric The Liberties Dublin</div>
+        <div class="hotel-cat">1 King Bed · 1 night</div>
+        <div class="hotel-desc">Contemporary design in Dublin's Liberties quarter. Booked on Hyatt points.</div>
+        <div class="hotel-ultima">✦ Cancellation: 48 hours prior · Hyatt points</div>
       </div>
       </a>
 
-      <a class="hotel-link" href="https://www.hyatt.com/park-hyatt/lonph-park-hyatt-london" target="_blank">
+      <a class="hotel-link" href="https://www.hyatt.com/park-hyatt/en-US/lhrph-park-hyatt-london-river-thames" target="_blank">
       <div class="hotel-card pick">
         <div class="hotel-loc">London · May 19–20</div>
-        <div class="hotel-name">Park Hyatt London</div>
-        <div class="hotel-cat">5-star luxury · 1 night</div>
-        <div class="hotel-desc">Final night before flying home to Hong Kong.</div>
+        <div class="hotel-name">Park Hyatt London River Thames</div>
+        <div class="hotel-cat">2 Twin Beds · 1 night</div>
+        <div class="hotel-desc">Park Hyatt London River Thames. Final night before flying home to Hong Kong.</div>
+        <div class="hotel-ultima">✦ Cancellation: 24 hours prior · Hyatt points</div>
       </div>
       </a>
 
@@ -538,10 +575,93 @@ footer {
   </section>
 </div>
 
+<!-- FLIGHT REFERENCE -->
+<section class="section flight-ref-section" id="flights">
+  <div class="section-label">Check-In Reference</div>
+  <h2>Flight <em>Details</em></h2>
+  <p class="flight-ref-intro">Pulled from the attached ticket PDFs, Ryanair itinerary email, and the Cathay calendar file on April 2, 2026. This section is for quick check-in lookup. Where the source files disagree, the conflict is called out explicitly instead of being merged.</p>
+  <div class="flight-ref-grid">
+
+    <div class="flight-card">
+      <div class="flight-card-date">May 5 · Hong Kong to Miami</div>
+      <h4>CX876 + AA2694</h4>
+      <div class="flight-card-source">Source: HQLWEZ PDF</div>
+      <ul class="flight-lines">
+        <li><strong>Cathay booking ref:</strong> D2IHYH</li>
+        <li><strong>CX876:</strong> HKG Terminal 1 16:05 → Dallas 17:50, Business, 14h 45m, seat 20K, 2 checked bags</li>
+        <li><strong>AA2694:</strong> Dallas 19:55 → Miami 23:48, First, Boeing 737-800, 2h 53m, seat 02B, 2 checked bags</li>
+        <li><strong>Passenger confirmed in source:</strong> Mengyu Lu</li>
+      </ul>
+    </div>
+
+    <div class="flight-card">
+      <div class="flight-card-date">May 8–9 · Miami to Geneva via London</div>
+      <h4>AA38 + BA750</h4>
+      <div class="flight-card-source">Source: HQLWEZ + EDZVJU PDFs</div>
+      <ul class="flight-lines">
+        <li><strong>AA38:</strong> Miami 19:05 → London Heathrow Terminal 3 09:00 on May 9, Business, Boeing 777-300ER, 8h 55m, seat 03J on HQLWEZ</li>
+        <li><strong>BA750:</strong> Heathrow Terminal 5 14:15 → Geneva Terminal 1 17:00, Economy, 1h 45m, confirmed</li>
+        <li><strong>Mengyu seat / ref:</strong> 15E on BA ref D2IHYH, baggage 2PC</li>
+        <li><strong>Tianqing seat / ref:</strong> 15D on BA ref FPSUPT, baggage 1PC</li>
+      </ul>
+    </div>
+
+    <div class="flight-card">
+      <div class="flight-card-date">May 12 · Geneva to Venice via Zurich</div>
+      <h4>LX2819 + LX1666</h4>
+      <div class="flight-card-source">Source: SVWJTS PDFs</div>
+      <ul class="flight-lines">
+        <li><strong>Swiss booking ref:</strong> FPPD3H</li>
+        <li><strong>LX2819:</strong> Geneva Terminal 1 20:00 → Zurich 20:55, Economy, 55 minutes, no meal service</li>
+        <li><strong>LX1666:</strong> Zurich 21:45 → Venice Marco Polo 22:50, Economy, 1h 05m, operated by Helvetic Airways, complimentary refreshment</li>
+        <li><strong>Passengers / tickets:</strong> Mengyu Lu 7249236642472, Tianqing Li 7249236642473</li>
+        <li><strong>Baggage:</strong> 1 checked bag each</li>
+      </ul>
+    </div>
+
+    <div class="flight-card">
+      <div class="flight-card-date">May 18 · Bergamo to Dublin</div>
+      <h4>FR4845</h4>
+      <div class="flight-card-source">Source: Ryanair itinerary email</div>
+      <ul class="flight-lines">
+        <li><strong>Ryanair booking ref:</strong> LRFI7Y</li>
+        <li><strong>Flight:</strong> Milan Bergamo 18:20 → Dublin 19:55, nonstop</li>
+        <li><strong>Mengyu:</strong> seat 04B, checked bag 20kg, fast track, priority and 2 cabin bags, Plus</li>
+        <li><strong>Tianqing:</strong> seat 04C, checked bag 20kg, fast track, priority and 2 cabin bags, Plus</li>
+        <li><strong>Check-in note:</strong> Ryanair says digital boarding passes are in the Ryanair app, not printed</li>
+      </ul>
+    </div>
+
+    <div class="flight-card">
+      <div class="flight-card-date">May 20–21 · London to Hong Kong</div>
+      <h4>CX250</h4>
+      <div class="flight-card-source">Source: HQLWEZ PDF + F9TQHL calendar</div>
+      <ul class="flight-lines">
+        <li><strong>Confirmed flight:</strong> Heathrow Terminal 3 18:20 on May 20 → Hong Kong Terminal 1 14:10 on May 21</li>
+        <li><strong>Aircraft / cabin:</strong> Boeing 777-300ER, Business, 12h 50m</li>
+        <li><strong>Mengyu booking ref:</strong> D2IHYH, seat 15K, 2 checked bags</li>
+        <li><strong>Additional Cathay calendar ref:</strong> F9TQHL also shows CX250 at the same times, with e-ticket 160-2130987312</li>
+      </ul>
+    </div>
+
+    <div class="flight-card flight-warning">
+      <div class="flight-card-date">Separate Cathay Calendar Booking</div>
+      <h4>Needs Verification</h4>
+      <div class="flight-card-source">Source: Calendar_F9TQHL.ics</div>
+      <ul class="flight-lines">
+        <li><strong>Booking ref:</strong> F9TQHL</li>
+        <li><strong>Calendar-only segments:</strong> CX349 Shanghai Hongqiao 10 Apr 13:20 → Hong Kong 16:05, CX253 Hong Kong 8 May 13:25 → London Heathrow T3 20:35, CX346 Hong Kong 26 May 13:05 → Shanghai Hongqiao 15:35</li>
+        <li><strong>Why flagged:</strong> the May 8 Cathay segment conflicts with the Miami → London AA38 ticket already shown above, so this looks like a different booking or a changed plan rather than the same checked-in itinerary</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
 
 
 <footer>
-  <p>Travel Itinerary · May 5–21, 2026 · Generated March 25, 2026</p>
+  <p>Travel Itinerary · May 5–21, 2026 · Updated with ticket details on April 2, 2026</p>
 </footer>
 
 <script>
