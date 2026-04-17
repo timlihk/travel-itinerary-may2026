@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>May 2026 — Miami · Europe · Hong Kong</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <style>
 :root {
   --ink: #1a1714;
@@ -256,6 +257,99 @@ a.hotel-link { text-decoration: none; color: inherit; display: block; }
   background: rgba(255,248,243,0.95);
 }
 
+/* AMALFI DINING MAP */
+.amalfi-map-section { background: linear-gradient(180deg, #f5ede0 0%, #ede3d2 100%); }
+.amalfi-map-intro { max-width: 780px; margin-bottom: 24px; font-size: 14px; color: var(--slate); line-height: 1.8; }
+.amalfi-map-wrap {
+  margin: 8px 0 18px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(26,23,20,0.12);
+  border: 1px solid rgba(184,148,62,0.22);
+  background: #d7e6ef;
+}
+#amalfi-leaflet-map { height: 520px; width: 100%; }
+@media(max-width:700px) { #amalfi-leaflet-map { height: 420px; } }
+.amalfi-legend {
+  display: flex; flex-wrap: wrap; gap: 10px 22px;
+  margin-bottom: 40px; font-size: 12px; color: var(--slate);
+}
+.amalfi-legend .lg-dot {
+  display: inline-block; width: 12px; height: 12px; border-radius: 50%;
+  vertical-align: middle; margin-right: 8px; border: 2px solid #fff;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.12);
+}
+.lg-hotel { background: #b8943e; }
+.lg-amalfi { background: #c4704b; }
+.lg-ravello { background: #7a8c6e; }
+.lg-positano { background: #4a7c8a; }
+.amalfi-pin {
+  display: flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 50%;
+  color: #fff; font-size: 12px; font-weight: 600;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.28);
+}
+.amalfi-pin.hotel { background: #b8943e; width: 36px; height: 36px; font-size: 16px; }
+.amalfi-pin.amalfi-zone { background: #c4704b; }
+.amalfi-pin.ravello-zone { background: #7a8c6e; }
+.amalfi-pin.positano-zone { background: #4a7c8a; }
+.leaflet-popup-content { font-family: inherit; margin: 12px 14px; font-size: 13px; line-height: 1.55; }
+.leaflet-popup-content .pop-meta {
+  font-size: 10px; color: var(--gold); letter-spacing: 1.6px; text-transform: uppercase; font-weight: 500;
+  margin-bottom: 4px;
+}
+.leaflet-popup-content .pop-title {
+  font-family: var(--font-display); font-size: 17px; font-weight: 500; color: var(--ink);
+  margin-bottom: 6px; line-height: 1.25;
+}
+.leaflet-popup-content .pop-dist { color: var(--slate); font-size: 12px; }
+.sub-h {
+  font-family: var(--font-display); font-size: 24px; font-weight: 400;
+  margin: 8px 0 16px;
+}
+.dining-plan-grid {
+  display: grid; grid-template-columns: 1fr; gap: 16px;
+  margin-bottom: 40px;
+}
+@media(min-width:800px) { .dining-plan-grid { grid-template-columns: repeat(3, 1fr); } }
+.dining-plan-card {
+  background: #fff;
+  border: 1px solid rgba(184,148,62,0.22);
+  border-radius: 14px;
+  padding: 24px 26px;
+  box-shadow: 0 6px 22px rgba(26,23,20,0.06);
+  position: relative;
+}
+.dining-plan-card.pick::before {
+  content: 'BOOK FIRST'; position: absolute; top: 14px; right: 14px;
+  font-size: 9px; letter-spacing: 2px; font-weight: 500; color: var(--ink);
+  background: var(--gold-light); padding: 3px 10px; border-radius: 12px;
+}
+.dp-night { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 8px; }
+.dp-name { font-family: var(--font-display); font-size: 24px; font-weight: 400; margin-bottom: 6px; line-height: 1.15; }
+.dp-where { font-size: 12px; color: var(--slate); margin-bottom: 12px; text-transform: none; letter-spacing: 0.3px; }
+.dp-note { font-size: 13px; color: var(--ink); line-height: 1.65; }
+.distance-list { display: grid; gap: 8px; }
+.distance-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 14px;
+  padding: 13px 18px;
+  background: rgba(255,255,255,0.72);
+  border-left: 3px solid var(--gold);
+  border-radius: 4px;
+  font-size: 13px;
+  align-items: center;
+}
+.distance-row .dist-name { color: var(--ink); font-weight: 500; }
+.distance-row .dist-where { color: var(--slate); font-size: 12px; }
+.distance-row .dist-mode { font-size: 10px; color: var(--slate); letter-spacing: 1.5px; text-transform: uppercase; }
+.distance-row .dist-time { color: var(--lake); font-weight: 500; white-space: nowrap; font-size: 12px; }
+@media(max-width:600px) {
+  .distance-row { grid-template-columns: 1fr; gap: 4px; }
+}
+
 /* FOOTER */
 footer {
   text-align: center; padding: 60px 24px; font-size: 12px;
@@ -342,7 +436,7 @@ footer {
       <div class="tl-dot"></div>
       <div class="tl-date">May 9–12 · Sat–Tue</div>
       <div class="tl-title">Amalfi</div>
-      <div class="tl-desc">Anantara Convento di Amalfi Grand Hotel · Anantara Suite With Sea View. Clifftop former monastery above the Tyrrhenian. Day trips to Ravello, Positano, Capri; Path of the Gods hike; lemon-grove &amp; limoncello stops; Michelin dining at Dei Cappuccini on-site.</div>
+      <div class="tl-desc">Anantara Convento di Amalfi Grand Hotel · Anantara Suite With Sea View. Clifftop former monastery above the Tyrrhenian. Day trips to Ravello, Positano, Capri; Path of the Gods hike; lemon-grove &amp; limoncello stops; on-site dining at Dei Cappuccini.</div>
       <span class="tl-tag tag-stay">3 nights</span>
     </div>
 
@@ -443,9 +537,11 @@ footer {
           <li><span class="act-tag at-nature"></span><strong>Emerald Grotto (Conca dei Marini)</strong> — Light-dappled sea cave, 4km west of Amalfi</li>
           <li><span class="act-tag at-culture"></span><strong>Museo della Carta</strong> — Paper museum in Amalfi's Valle delle Ferriere. Easy riverside walk behind town</li>
           <li><span class="act-tag at-walk"></span><strong>Atrani</strong> — Quieter village next door, 10-min walk via the footpath</li>
-          <li><span class="act-tag at-food"></span><strong>Dei Cappuccini</strong> — Michelin-starred on-site at Anantara, former refectory with sea view</li>
-          <li><span class="act-tag at-food"></span><strong>La Caravella</strong> — Michelin-starred Amalfi classic, majolica dining room, exceptional wine list</li>
-          <li><span class="act-tag at-food"></span><strong>La Sponda at Le Sirenuse</strong> — Michelin-starred, 400 candles, Positano's iconic evening (ferry + late taxi back)</li>
+          <li><span class="act-tag at-food"></span><strong>Dei Cappuccini</strong> — Acclaimed on-site restaurant at Anantara, former refectory with sea view (not Michelin-starred per 2026 Guide)</li>
+          <li><span class="act-tag at-food"></span><strong>La Caravella</strong> — 1 Michelin star (since 1959, oldest in Southern Italy), majolica dining room, exceptional wine list · 5-min walk from hotel</li>
+          <li><span class="act-tag at-food"></span><strong>Il Flauto di Pan</strong> — 1 Michelin star at Villa Cimbrone, Ravello; ~8 min taxi up the hill, evenings only, 35 seats</li>
+          <li><span class="act-tag at-food"></span><strong>Rossellinis</strong> — 1 Michelin star at Palazzo Avino, Ravello; dramatic terrace over the Gulf of Salerno</li>
+          <li><span class="act-tag at-food"></span><strong>La Sponda at Le Sirenuse</strong> — 1 Michelin star, 400 candles, Positano's iconic evening (25 min ferry + late taxi back)</li>
         </ul>
       </div>
     </div>
@@ -512,6 +608,77 @@ footer {
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- AMALFI DINING MAP -->
+<section class="section amalfi-map-section" id="amalfi-dining">
+  <div class="section-label">Amalfi Dining</div>
+  <h2>Hotel &amp; <em>Restaurants</em></h2>
+  <p class="amalfi-map-intro">Our hotel sits on the cliff above Amalfi town, a 5-minute walk down to Piazza del Duomo. Michelin dining clusters in three zones: Amalfi town (walkable), Ravello (short taxi up the hill), and Positano (25 min by ferry, or a pre-booked return taxi after the ferry stops around 8 pm).</p>
+
+  <div class="amalfi-map-wrap">
+    <div id="amalfi-leaflet-map" role="img" aria-label="Map of Anantara Convento di Amalfi and nearby restaurants in Amalfi, Ravello, and Positano"></div>
+  </div>
+  <div class="amalfi-legend">
+    <span><span class="lg-dot lg-hotel"></span>Our hotel</span>
+    <span><span class="lg-dot lg-amalfi"></span>Amalfi town · walkable</span>
+    <span><span class="lg-dot lg-ravello"></span>Ravello · short taxi</span>
+    <span><span class="lg-dot lg-positano"></span>Positano · ferry / long taxi</span>
+  </div>
+
+  <h3 class="sub-h">Proposed 3-night dining plan</h3>
+  <div class="dining-plan-grid">
+    <div class="dining-plan-card">
+      <div class="dp-night">Sat May 9 · Night 1</div>
+      <div class="dp-name">Dei Cappuccini</div>
+      <div class="dp-where">On-site at the Anantara · zero transfers</div>
+      <div class="dp-note">Arrival-day dinner with no logistics. Cliffside terrace in the former refectory; tasting menu by Chef Claudio Lanuto. Strong reviews, not currently Michelin-starred.</div>
+    </div>
+    <div class="dining-plan-card pick">
+      <div class="dp-night">Sun May 10 · Night 2</div>
+      <div class="dp-name">Il Flauto di Pan</div>
+      <div class="dp-where">Villa Cimbrone, Ravello · ~8 min taxi</div>
+      <div class="dp-note">1 Michelin star; evenings only, 35 seats — reservations essential. Gardens and Gulf of Salerno view. Pair with a Ravello daytime (Villa Rufolo, Villa Cimbrone belvedere).</div>
+    </div>
+    <div class="dining-plan-card pick">
+      <div class="dp-night">Mon May 11 · Night 3</div>
+      <div class="dp-name">La Sponda at Le Sirenuse</div>
+      <div class="dp-where">Positano · 25 min ferry / 45 min taxi</div>
+      <div class="dp-note">1 Michelin star; 400-candle dining room. Book weeks ahead. Ferry back stops ~8 pm — pre-book a return taxi (~45 min, €100+). Smart casual, no shorts; jackets optional.</div>
+    </div>
+  </div>
+
+  <h3 class="sub-h">Distances from the hotel</h3>
+  <div class="distance-list">
+    <div class="distance-row">
+      <div><span class="dist-name">Dei Cappuccini</span> <span class="dist-where">· on-site at the Anantara</span></div>
+      <div class="dist-mode">On property</div><div class="dist-time">0 min</div>
+    </div>
+    <div class="distance-row">
+      <div><span class="dist-name">La Caravella</span> <span class="dist-where">· Amalfi town (1 Michelin ★)</span></div>
+      <div class="dist-mode">Walk</div><div class="dist-time">5–10 min</div>
+    </div>
+    <div class="distance-row">
+      <div><span class="dist-name">Da Gemma</span> <span class="dist-where">· Amalfi town (local classic)</span></div>
+      <div class="dist-mode">Walk</div><div class="dist-time">5–10 min</div>
+    </div>
+    <div class="distance-row">
+      <div><span class="dist-name">Il Flauto di Pan</span> <span class="dist-where">· Villa Cimbrone, Ravello (1 Michelin ★)</span></div>
+      <div class="dist-mode">Taxi</div><div class="dist-time">~8 min · €45–60</div>
+    </div>
+    <div class="distance-row">
+      <div><span class="dist-name">Rossellinis</span> <span class="dist-where">· Palazzo Avino, Ravello (1 Michelin ★)</span></div>
+      <div class="dist-mode">Taxi</div><div class="dist-time">~6 min · €40–55</div>
+    </div>
+    <div class="distance-row">
+      <div><span class="dist-name">La Sponda</span> <span class="dist-where">· Le Sirenuse, Positano (1 Michelin ★)</span></div>
+      <div class="dist-mode">Ferry / Taxi</div><div class="dist-time">25 min ferry · 25–45 min drive</div>
+    </div>
+    <div class="distance-row">
+      <div><span class="dist-name">Da Adolfo</span> <span class="dist-where">· Positano beach (lunch only, boat access)</span></div>
+      <div class="dist-mode">Ferry + Boat</div><div class="dist-time">~30 min</div>
+    </div>
   </div>
 </section>
 
@@ -665,12 +832,62 @@ footer {
   <p>Travel Itinerary · May 5–21, 2026 · Geneva leg swapped for Amalfi on April 18, 2026</p>
 </footer>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <script>
 // Scroll-triggered animations
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
 }, { threshold: 0.15 });
 document.querySelectorAll('.tl-item, .dest-card').forEach(el => observer.observe(el));
+
+// Amalfi dining map
+(function() {
+  const mapEl = document.getElementById('amalfi-leaflet-map');
+  if (!mapEl || typeof L === 'undefined') return;
+
+  const HOTEL = [40.6354, 14.6008];
+  const places = [
+    { coords: [40.6339, 14.6022], name: 'La Caravella', meta: 'Amalfi town · 1 Michelin ★', dist: '5–10 min walk from hotel', zone: 'amalfi-zone', label: 'A' },
+    { coords: [40.6348, 14.6029], name: 'Da Gemma',     meta: 'Amalfi town · local classic', dist: '5–10 min walk from hotel', zone: 'amalfi-zone', label: 'B' },
+    { coords: [40.6479, 14.6139], name: 'Il Flauto di Pan (Villa Cimbrone)', meta: 'Ravello · 1 Michelin ★', dist: '~8 min taxi up the hill (€45–60)', zone: 'ravello-zone', label: 'C' },
+    { coords: [40.6492, 14.6100], name: 'Rossellinis (Palazzo Avino)',       meta: 'Ravello · 1 Michelin ★', dist: '~6 min taxi up the hill (€40–55)', zone: 'ravello-zone', label: 'D' },
+    { coords: [40.6283, 14.4866], name: 'La Sponda at Le Sirenuse',          meta: 'Positano · 1 Michelin ★', dist: '25 min ferry · 25–45 min drive', zone: 'positano-zone', label: 'E' }
+  ];
+
+  const map = L.map('amalfi-leaflet-map', { scrollWheelZoom: false }).setView([40.64, 14.55], 11);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19
+  }).addTo(map);
+
+  function pin(zone, label) {
+    return L.divIcon({
+      className: '',
+      html: '<div class="amalfi-pin ' + zone + '">' + label + '</div>',
+      iconSize: [32, 32],
+      iconAnchor: [16, 16]
+    });
+  }
+
+  L.marker(HOTEL, { icon: pin('hotel', '★'), zIndexOffset: 1000 }).addTo(map)
+    .bindPopup(
+      '<div class="pop-meta">Our hotel · Amalfi</div>' +
+      '<div class="pop-title">Anantara Convento di Amalfi</div>' +
+      '<div class="pop-dist">Clifftop former monastery · 600 m (5 min walk) to Piazza del Duomo</div>'
+    );
+
+  places.forEach(p => {
+    L.marker(p.coords, { icon: pin(p.zone, p.label) }).addTo(map)
+      .bindPopup(
+        '<div class="pop-meta">' + p.meta + '</div>' +
+        '<div class="pop-title">' + p.name + '</div>' +
+        '<div class="pop-dist">' + p.dist + '</div>'
+      );
+  });
+
+  const allCoords = [HOTEL].concat(places.map(p => p.coords));
+  map.fitBounds(allCoords, { padding: [40, 40] });
+})();
 </script>
 </body>
 </html>
